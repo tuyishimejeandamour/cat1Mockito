@@ -50,9 +50,12 @@ class ShoppingCartTest {
 	
 		@Test
 		public void addAnItemTwice(){
-		    cart.addToCart("Apple");
-		    cart.addToCart("Apple");
-		    assertThat(cart.getTotalItems(), is(2));
+			Items item = new Items("apple",2.0);
+			Items item1 = new Items("apple",2.0);
+		    cart.addToCart(item1);
+		    cart.addToCart(item);
+		    assertEquals(1,cart.getTotalItems());
+		   
 		   
 		}
 	   // test case checks for apple item and cart contains specific price is  1.0
@@ -60,16 +63,18 @@ class ShoppingCartTest {
 		public void checkOutOneItem(){
 			Items item = new Items("apple",1.0);
 		    cart.addToCart(item);
-		    assertThat(cart.getTotal(),is(1.0));
+		    assertEquals(1.0,cart.getTotal());
+		    
 		}
 		 // test case checks for two items and cart contains specific  price is 1.60
 		@Test
 		public void checkoutTwoSeparateItems(){
 			Items item = new Items("apple",2.0);
-			Items item1 = new Items("orange",2.0);
+			Items item1 = new Items("orange",3.0);
 		    cart.addToCart(item);
 		    cart.addToCart(item1);
-		    assertThat(cart.getTotal(),is(1.60));
+		    assertEquals(5.0,cart.getTotal());
+		  
 		}
 		
 		@Test
@@ -103,9 +108,12 @@ class ShoppingCartTest {
 			Items item = new Items("apple",2.0);
 			Items item1 = new Items("orange",3.0);
 			cart.addToCart(item);
+			cart.addToCart(item1);
 			
-		    cart.remove("Apple");
-		    assertThat(cart.getTotalItems(), is(1)); 
+		    cart.removeToCart(item1);
+		    assertEquals(2.0,cart.getTotal());
+		    assertEquals(1,cart.getTotalItems());
+		    
 		}
 
   
